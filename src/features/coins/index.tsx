@@ -16,7 +16,7 @@ const Home = () => {
     };
 
     fetchCoinData();
-  }, []);
+  }, [getCtyptos]);
 
   return (
     <div>

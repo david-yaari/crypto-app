@@ -1,6 +1,5 @@
 import React from 'react';
 import { CoinType } from '../app/common/types';
-import { ListGroup, ListGroupItem } from 'reactstrap';
 
 export interface Props {
   coin?: CoinType;

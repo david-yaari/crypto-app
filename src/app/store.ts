@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { cryptoApi } from '../services/cryptoApi';
-import { curryGetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware';
+//import { getetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware';
 
 export const store = configureStore({
   reducer: {
