@@ -1,0 +1,13 @@
+// Scss/custom.scss
+
+// Include function
+@import "../node_modules/bootstrap/scss/functions";
+
+// Custom variables
+$primary-color: #007bff; 
+$success: #ff0000;
+$font-family-sans-serif: 'Helvetica Neue', Arial, sans-serif; 
+
+// Include variables and mixins
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
