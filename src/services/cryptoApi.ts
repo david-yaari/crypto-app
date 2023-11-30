@@ -1,5 +1,6 @@
 // v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { CoinType } from '../app/common/types';
 
 export const cryptoApi = createApi({
   reducerPath: 'cryptoApi',
@@ -15,7 +16,11 @@ export const cryptoApi = createApi({
         };
       },
     }),
+    getAllCryptos: builder.query<CoinType[], void>({
+      query: () =>
+        `v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en`,
+    }),
   }),
 });
 
-export const { useGetCryptosMutation } = cryptoApi;
+export const { useGetCryptosMutation, useGetAllCryptosQuery } = cryptoApi;

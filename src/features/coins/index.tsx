@@ -1,13 +1,18 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useGetCryptosMutation } from '../../services/cryptoApi';
+import React, { useEffect, useState } from 'react';
+import {
+  useGetAllCryptosQuery,
+  useGetCryptosMutation,
+} from '../../services/cryptoApi';
 import Items from '../../components/Items';
 import { CoinType } from '../../app/common/types';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<string>('10');
+  const [name, setName] = useState<string>('');
   const [getCtyptos, { data: cryptos }] = useGetCryptosMutation();
+  const { data } = useGetAllCryptosQuery();
   const pages = ['5', '10', '15', '20', '25', '30'];
 
   //console.log('data', data);
@@ -24,8 +29,24 @@ const Home = () => {
     setPerPage(e.target.value);
   };
 
+  const searchCoins = data?.filter((coin) =>
+    coin.name.toLocaleLowerCase().includes(name.toLocaleLowerCase())
+  );
+
   return (
     <div>
+      <div className='container text-center w-25'>
+        <div className='input-group mb-3'>
+          <input
+            type='text'
+            id='search_crypto'
+            className='form-control text-center'
+            placeholder='Search for your favourite crypto'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+      </div>
       <div className='container'>
         <div className='row text-center'>
           <hr></hr>
@@ -56,12 +77,18 @@ const Home = () => {
           <hr></hr>
         </div>
       </div>
-      {cryptos?.map((coin: CoinType) => (
-        <Link to={`/coin/${coin.id}`} key={coin.id}>
-          <Items coin={coin} />
-        </Link>
-      ))}
-      <div className='container'>
+      {!name
+        ? cryptos?.map((coin: CoinType) => (
+            <Link to={`/coin/${coin.id}`} key={coin.id}>
+              <Items coin={coin} />
+            </Link>
+          ))
+        : searchCoins?.map((coin: CoinType) => (
+            <Link to={`/coin/${coin.id}`} key={coin.id}>
+              <Items coin={coin} />
+            </Link>
+          ))}
+      <div className='container' style={{ opacity: `${name ? 0 : 1}` }}>
         <div className='row text-center'>
           <div className='col-lg text-lg-end'>
             <button
@@ -87,12 +114,18 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className='container text-center'>
-        <div className='dropdown inline-block relative ml-8'>
-          <span>Per Page: </span>
-          <select value={perPage} onChange={handlePage}>
+      <div className='container text-center w-25'>
+        <div className=''>
+          <p>Per Page: </p>
+          <select
+            className='form-select text-center'
+            value={perPage}
+            onChange={handlePage}
+          >
             {pages.map((page, index) => (
-              <option key={index}>{page}</option>
+              <option className='' key={index}>
+                {page}
+              </option>
             ))}
           </select>
         </div>
