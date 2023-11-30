@@ -3,8 +3,8 @@ import './css/custom.css';
 
 // Bootstrap Bundle JS
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-
 import 'bootstrap/dist/js/bootstrap.bundle';
+import 'bootstrap/dist/js/bootstrap.min';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './features/coins';
 import Coin from './features/coin';
