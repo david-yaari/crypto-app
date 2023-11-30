@@ -20,7 +20,36 @@ const Home = () => {
 
   return (
     <div>
-      <h2>Crypto Coin</h2>
+      <div className='container'>
+        <div className='row text-center'>
+          <hr></hr>
+          <div className='col-lg'>
+            <p>#</p>
+          </div>
+          <div className='col-lg'>
+            <p>Name</p>
+          </div>
+          <div className='col-lg'>
+            <p></p>
+          </div>
+          <div className='col-lg'>
+            <p></p>
+          </div>
+          <div className='col-lg'>
+            <p className='text-lg-end text-center'>Price</p>
+          </div>
+          <div className='col-lg'>
+            <p>Price % 24h</p>
+          </div>
+          <div className='col-lg'>
+            <p>Total Volume</p>
+          </div>
+          <div className='col-lg'>
+            <p>Market Cap</p>
+          </div>
+          <hr></hr>
+        </div>
+      </div>
       {cryptos?.map((coin: CoinType) => (
         <Link to={`/coin/${coin.id}`} key={coin.id}>
           <Items coin={coin} />
